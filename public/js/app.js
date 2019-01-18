@@ -37,6 +37,9 @@ window.addEventListener('load', () => {
     // Display loader first
     let html = ratesTemplate();
     el.html(html);
+    $('.item').removeClass('active');
+    const link = $(`a[href$='${window.location.pathname}']`);
+    link.addClass('active');
     try {
       // Load Currency Rates
       const response = await api.get('/rates');
@@ -87,6 +90,9 @@ window.addEventListener('load', () => {
     // Display loader first
     let html = exchangeTemplate();
     el.html(html);
+    $('.item').removeClass('active');
+    const link = $(`a[href$='${window.location.pathname}']`);
+    link.addClass('active');
     try {
       // Load Symbols
       const response = await api.get('/symbols');
@@ -139,7 +145,10 @@ window.addEventListener('load', () => {
   router.add('/historical', () => {
     const html = historicalTemplate();
     el.html(html);
-    // Activate Date Picker
+    $('.item').removeClass('active');
+    const link = $(`a[href$='${window.location.pathname}']`);
+    link.addClass('active');
+    // Activate Date Picker    
     $('#calendar').calendar({
       type: 'date',
       formatter: {
@@ -174,4 +183,5 @@ window.addEventListener('load', () => {
     const path = href.substr(href.lastIndexOf('/'));
     router.navigateTo(path);
   });
+  router.addUriListener();
 });
